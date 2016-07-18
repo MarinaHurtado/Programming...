@@ -73,7 +73,7 @@ public class RecurssionFunctions {
     }
     
     private static void combST(String str, int n, StringBuilder printing, int len){
-        if(n==len){
+        if(n>len){
             System.out.println(printing.toString());
             return;
         }
