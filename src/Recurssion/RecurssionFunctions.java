@@ -214,7 +214,12 @@ public class RecurssionFunctions {
         char[] word = new char[7];
         int [] value = {0,0,0,0,0,0,0};
         for(int i=0; i<7; i++){
-            word[i]= getCharKey(numbers[i], 1);
+            if (numbers[i]==0)
+                word[i]= '0';
+            else if (numbers[i]==1)
+                word[i]= '1';
+            else
+                word[i]= getCharKey(numbers[i], 1);
         }
         System.out.println(new String(word));
         while(true){
@@ -223,12 +228,14 @@ public class RecurssionFunctions {
             for(int i=5; i>=0; i--){
                 if(value[i+1]%3==0){
                     value[i]++;
-                    word[i]=getCharKey(numbers[i], (value[i])%3+1); //Ver 1
-                    if(i==0 && value[0]==3){
+                    int num = numbers[i];
+                    if (num>1)
+                        word[i]=getCharKey(num, (value[i])%3+1); //Ver 1
+                    if(i==0 && (value[0]==3 || num<2)){
                         return;
                     }
                 }
-                else
+                else 
                     break;
             }
             System.out.println(new String(word));
@@ -246,7 +253,7 @@ public class RecurssionFunctions {
         //permutationsString(" ");
         //permutationsString("AAA");
         //combinations("1234");
-        int[] num = {4,9,7,3,9,2,7};
+        int[] num = {4,9,7,1,9,2,7};
         //numberToWord(num);
         toWords(num);
     }
