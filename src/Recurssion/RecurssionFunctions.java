@@ -118,30 +118,60 @@ public class RecurssionFunctions {
     corresponding to the letter in that position on the specified key. For example,
     GetCharKey(3, 2) will return ‘E’ because the telephone key 3 has the letters “DEF”
     on it and ‘E’ is the second letter. */
+
+//    public static void numberToWord(int[] phone){
+//        StringBuilder st = new StringBuilder();
+//        int k=0;
+//        words(phone, st, 0);
+//    }
+//    
+//    private static void words(int[] phone, StringBuilder st, int n){
+//        if(n>=7){
+//            System.out.println(st.toString());
+//            return;
+//        }
+//        int number = phone[n];
+//        if(number==1 || number == 0){
+//            st.append(number);
+//            words(phone, st, n+1);
+//            st.setLength(st.length()-1);
+//        }
+//        else{
+//            for(int i=1; i<=3; i++){
+//                char c = getCharKey(number,i);
+//                st.append(c);
+//                words(phone, st, n+1);
+//                st.setLength(st.length()-1);
+//            }
+//        }
+//    }
+    
     public static void numberToWord(int[] phone){
         StringBuilder st = new StringBuilder();
-        words(phone, st, 0);
+        int k=0;
+        System.out.println(words(phone, st, 0, k));
     }
     
-    private static void words(int[] phone, StringBuilder st, int n){
+    private static int words(int[] phone, StringBuilder st, int n, int k){
         if(n>=7){
             System.out.println(st.toString());
-            return;
+            return k+1;
+        }
+        int number = phone[n];
+        if(number==1 || number == 0){
+            st.append(number);
+            k = words(phone, st, n+1, k);
+            st.setLength(st.length()-1);
         }
         else{
             for(int i=1; i<=3; i++){
-                int number = phone[n];
-                if(number==1 || number == 0){
-                    st.append(number);
-                }
-                else{
-                    char c = getCharKey(number,i);
-                    st.append(c);
-                }
-                words(phone, st, n+1);
+                char c = getCharKey(number,i);
+                st.append(c);
+                k = words(phone, st, n+1, k);
                 st.setLength(st.length()-1);
             }
         }
+        return k;
     }
     
     public static char getCharKey( int telephoneKey, int place ){
@@ -173,44 +203,8 @@ public class RecurssionFunctions {
         return aux[telephoneKey][place];
     }
     
-    //Reimplement PrintTelephoneWords without using recursion.
-//    public static void printTelephoneWords(int [] number){
-//        char[] word = new char [7];
-//        int[] times = new int[7];
-//        int[] count = new int[7];
-//        int[] actValue = {1,1,1,1,1,1,1,1};
-//        //Asignar valores con 1
-//        times[6]=1;
-//        for(int i=5; i>=0; i--){
-//            int mult = times[i+1]*3;
-//            times[i] = mult;
-//            count[i] = mult;
-//        }
-//        for(int i=0; i<7; i++){
-//            word
-//        }
-//        
-//        while(count[0]>1){
-//            for(int i=0; i<7; i++){
-//                if(count[i]==1){
-//                    int actVal = actValue[i];
-//                    actValue[i]= actVal++;  
-//                    int num=number[i];
-//                    if(num==0 || num==1){
-//                        //Hacer algo 
-//                    }
-//                    else{
-//                        word[i]=getCharKey(num, actVal%3);
-//                        count[i]=times[i];
-//                    }
-//                    System.out.println(new String (word));
-//                }
-//                count[i]--;
-//            }
-//        }
-//    }
-    
     public static void toWords(int[] numbers){
+        int ansCount = 0;
         char[] word = new char[7];
         int [] value = {0,0,0,0,0,0,0};
         for(int i=0; i<7; i++){
@@ -223,8 +217,10 @@ public class RecurssionFunctions {
         }
         System.out.println(new String(word));
         while(true){
-            value[6]++;
-            word[6]=getCharKey(numbers[6], value[6]%3+1);
+            if(numbers[6]>1){
+                value[6]++;
+                word[6]=getCharKey(numbers[6], value[6]%3+1);
+            }
             for(int i=5; i>=0; i--){
                 if(value[i+1]%3==0){
                     value[i]++;
@@ -232,6 +228,7 @@ public class RecurssionFunctions {
                     if (num>1)
                         word[i]=getCharKey(num, (value[i])%3+1); //Ver 1
                     if(i==0 && (value[0]==3 || num<2)){
+                        System.out.println(ansCount);
                         return;
                     }
                 }
@@ -239,6 +236,7 @@ public class RecurssionFunctions {
                     break;
             }
             System.out.println(new String(word));
+            ansCount++;
         }
     }
     
@@ -253,7 +251,7 @@ public class RecurssionFunctions {
         //permutationsString(" ");
         //permutationsString("AAA");
         //combinations("1234");
-        int[] num = {4,9,7,1,9,2,7};
+        int[] num = {4,9,7,1,1,2,7};
         //numberToWord(num);
         toWords(num);
     }
