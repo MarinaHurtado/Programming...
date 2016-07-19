@@ -64,25 +64,174 @@ public class RecurssionFunctions {
     combinations that differ only in ordering of their characters are the same combination.
     In other words, “12” and “31” are different combinations from the input string
     “123”, but “21” is the same as “12”. */
-    public static void combinationsString(String str){
-        int n = str.length();
+//    public static void combinationsString(String str){
+//        int n = str.length();
+//        StringBuilder st = new StringBuilder();
+//        for(int i=1; i<n; i++)
+//            combST(str, 0, st, i);
+//        System.out.println(str);
+//    }
+//    
+//    private static void combST(String str, int n, StringBuilder printing, int len){
+//        if(n==len){
+//            System.out.println(printing.toString());
+//            return;
+//        }
+//        else{
+//            for(int i=n; i<str.length(); i++){ 
+//                printing.append(str.charAt(i));
+//                combST(str, i+1, printing, len);
+//                printing.setLength(printing.length()-1);
+//            }
+//        }
+//    }
+    
+    public static void combinations(String str){
         StringBuilder st = new StringBuilder();
-        for(int i=1; i<n; i++)
-            combST(str, 0, st, i);
-        System.out.println(str);
+        for(int i=1; i<=str.length(); i++){
+            combinationsAux(str, st, 0, i);
+        }
     }
     
-    private static void combST(String str, int n, StringBuilder printing, int len){
-        if(n>len){
+    public static void combinationsAux(String str, StringBuilder printing, int n, int length){
+        if(n==length){
             System.out.println(printing.toString());
             return;
         }
         else{
-            for(int i=n; i<str.length(); i++){ 
+            for(int i=n; i<str.length(); i++){
                 printing.append(str.charAt(i));
-                combST(str, i+1, printing, len);
+                combinationsAux(str, printing, i+1, length);
                 printing.setLength(printing.length()-1);
             }
+        }   
+    }
+    
+    /* Write a routine that takes a seven-digit telephone number and prints out all of the
+    possible “words” or combinations of letters that can represent the given number.
+    Because the 0 and 1 keys have no letters on them, you should change only the digits
+    2–9 to letters. You’ll be passed an array of seven integers, with each element being
+    one digit in the number. You may assume that only valid phone numbers will be
+    passed to your routine. You can use the helper routine
+    char getCharKey( int telephoneKey, int place )
+    which takes a telephone key (0–9) and a place of either 1, 2, 3 and returns the character
+    corresponding to the letter in that position on the specified key. For example,
+    GetCharKey(3, 2) will return ‘E’ because the telephone key 3 has the letters “DEF”
+    on it and ‘E’ is the second letter. */
+    public static void numberToWord(int[] phone){
+        StringBuilder st = new StringBuilder();
+        words(phone, st, 0);
+    }
+    
+    private static void words(int[] phone, StringBuilder st, int n){
+        if(n>=7){
+            System.out.println(st.toString());
+            return;
+        }
+        else{
+            for(int i=1; i<=3; i++){
+                int number = phone[n];
+                if(number==1 || number == 0){
+                    st.append(number);
+                }
+                else{
+                    char c = getCharKey(number,i);
+                    st.append(c);
+                }
+                words(phone, st, n+1);
+                st.setLength(st.length()-1);
+            }
+        }
+    }
+    
+    public static char getCharKey( int telephoneKey, int place ){
+        char[][] aux = new char[10][4];
+        aux[2][1] = 'A';
+        aux[2][2] = 'B';
+        aux[2][3] = 'C';
+        aux[3][1] = 'D';
+        aux[3][2] = 'E';
+        aux[3][3] = 'F';
+        aux[4][1] = 'G';
+        aux[4][2] = 'H';
+        aux[4][3] = 'I';
+        aux[5][1] = 'J';
+        aux[5][2] = 'K';
+        aux[5][3] = 'L';
+        aux[6][1] = 'M';
+        aux[6][2] = 'N';
+        aux[6][3] = 'O';
+        aux[7][1] = 'P';
+        aux[7][2] = 'R';
+        aux[7][3] = 'S';
+        aux[8][1] = 'T';
+        aux[8][2] = 'U';
+        aux[8][3] = 'V';
+        aux[9][1] = 'W';
+        aux[9][2] = 'X';
+        aux[9][3] = 'Y';
+        return aux[telephoneKey][place];
+    }
+    
+    //Reimplement PrintTelephoneWords without using recursion.
+//    public static void printTelephoneWords(int [] number){
+//        char[] word = new char [7];
+//        int[] times = new int[7];
+//        int[] count = new int[7];
+//        int[] actValue = {1,1,1,1,1,1,1,1};
+//        //Asignar valores con 1
+//        times[6]=1;
+//        for(int i=5; i>=0; i--){
+//            int mult = times[i+1]*3;
+//            times[i] = mult;
+//            count[i] = mult;
+//        }
+//        for(int i=0; i<7; i++){
+//            word
+//        }
+//        
+//        while(count[0]>1){
+//            for(int i=0; i<7; i++){
+//                if(count[i]==1){
+//                    int actVal = actValue[i];
+//                    actValue[i]= actVal++;  
+//                    int num=number[i];
+//                    if(num==0 || num==1){
+//                        //Hacer algo 
+//                    }
+//                    else{
+//                        word[i]=getCharKey(num, actVal%3);
+//                        count[i]=times[i];
+//                    }
+//                    System.out.println(new String (word));
+//                }
+//                count[i]--;
+//            }
+//        }
+//    }
+    
+    public static void toWords(int[] numbers){
+        char[] word = new char[7];
+        int [] value = {0,0,0,0,0,0,0};
+        for(int i=0; i<7; i++){
+            word[i]= getCharKey(numbers[i], 1);
+        }
+        System.out.println(new String(word));
+        while(true){
+            value[6]++;
+            word[6]=getCharKey(numbers[6], value[6]%3+1);
+            for(int i=5; i>=0; i--){
+                if(value[i+1]%3==0){
+                    value[i]++;
+                    word[i]=getCharKey(numbers[i], (value[i])%3+1); //Ver 1
+                    if(i==0 && value[0]==3){
+                        return;
+                    }
+                }
+                else
+                    break;
+            }
+            System.out.println(new String(word));
         }
     }
     
@@ -96,7 +245,10 @@ public class RecurssionFunctions {
         //permutationsString("ABCD");
         //permutationsString(" ");
         //permutationsString("AAA");
-        combinationsString("1234");
+        //combinations("1234");
+        int[] num = {4,9,7,3,9,2,7};
+        //numberToWord(num);
+        toWords(num);
     }
     
 }
