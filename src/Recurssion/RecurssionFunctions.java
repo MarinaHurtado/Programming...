@@ -203,6 +203,7 @@ public class RecurssionFunctions {
         return aux[telephoneKey][place];
     }
     
+    //Checar, da más reespuestas de las necesarias
     public static void toWords(int[] numbers){
         int ansCount = 0;
         char[] word = new char[7];
@@ -226,7 +227,7 @@ public class RecurssionFunctions {
                     value[i]++;
                     int num = numbers[i];
                     if (num>1)
-                        word[i]=getCharKey(num, (value[i])%3+1); //Ver 1
+                        word[i]=getCharKey(num, (value[i])%3+1); 
                     if(i==0 && (value[0]==3 || num<2)){
                         System.out.println(ansCount);
                         return;
@@ -251,7 +252,7 @@ public class RecurssionFunctions {
         //permutationsString(" ");
         //permutationsString("AAA");
         //combinations("1234");
-        int[] num = {4,9,7,1,1,2,7};
+        int[] num = {4,9,7,1,9,2,7};
         //numberToWord(num);
         toWords(num);
     }
