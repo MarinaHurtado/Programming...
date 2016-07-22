@@ -11,4 +11,13 @@ package Math;
  */
 public class Solution {
     
+    //Given an integer n, return the number of trailing zeroes in n!.
+    //Note: Your solution should be in logarithmic time complexity.
+    public int trailingZeroes(int a) {
+	    int count=0;
+	    for(int i=5; i<=a;  i*=5)
+	        count+=(a/i);
+	    return count;
+	}
+    
 }
