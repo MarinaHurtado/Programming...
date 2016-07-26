@@ -5,6 +5,7 @@
  */
 package Trees;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 /**
@@ -59,6 +60,40 @@ public class BinaryTree {
             waiting.push(pop.left);
         }
     }
+    
+    //Given a binary tree, return the inorder traversal of its nodes’ values.
+    //Using recursion is not allowed.
+    /**
+    * Definition for binary tree
+    * class TreeNode {
+    *     int val;
+    *     TreeNode left;
+    *     TreeNode right;
+    *     TreeNode(int x) { val = x; }
+    * }
+    */
+    public ArrayList<Integer> inorderTraversal(TreeNode a) {  
+        if(a==null)
+            return null;
+        ArrayList<Integer> arr = new ArrayList();
+        Stack waiting = new Stack();
+        waiting.push(a);
+        while(!waiting.empty()){
+            TreeNode pop = (TreeNode)waiting.pop();
+            if(pop!=null){
+                TreeNode left = pop.left;
+                if(left!=null){
+                    pop.left = null;
+                    waiting.push(pop);
+                    waiting.push(left);
+                }
+                else{
+                    arr.add(pop.val);
+                    waiting.push(pop.right);
+                }
+            }
+        }
+      
     
     public Node lowestCommonAncestor(Node root, Node c1, Node c2){
         if ((root.data<c1.data && root.data>c2.data) || (root.data>c1.data && root.data<c2.data))
