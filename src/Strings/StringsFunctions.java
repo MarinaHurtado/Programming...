@@ -184,6 +184,37 @@ public class StringsFunctions {
         return st.reverse().toString();
     }
     
+    /*
+    Given an input string, reverse the string word by word.
+
+    Example:
+    Given s = "the sky is blue",
+    return "blue is sky the".
+
+    A sequence of non-space characters constitutes a word.
+    Your reversed string should not contain leading or trailing spaces, even if it is present in the input string.
+    If there are multiple spaces between words, reduce them to a single space in the reversed string. */
+    public static String reverseWords(String a) {
+	    String[] arr = a.split(" ");
+	    StringBuilder cad = new StringBuilder();
+	    for(int i= arr.length-1; i>=0; i--){
+	        String w = arr[i];
+                try{
+                if(w.charAt(0)!= ' '){
+                    for(int j=0; j<w.length(); j++){
+                        char c = w.charAt(j);
+                        if(c!=' '){
+                            cad.append(c);
+                        }
+                    }
+                    cad.append(' ');
+                }
+                } catch(Exception e){}
+	    }
+	    cad.deleteCharAt(cad.length()-1);
+	    return cad.toString();
+	}
+    
         
     ////////////////////////////////////////////////////////////////////////////////////////////////
     
@@ -195,10 +226,12 @@ public class StringsFunctions {
         //System.out.println(StringToInteger("0"));
         //System.out.println(StringToInteger("-1"));
         //System.out.println(StringToInteger("1"));
-        System.out.println(IntToString(0));
-        System.out.println(IntToString(1));
-        System.out.println(IntToString(-1));
-        System.out.println(IntToString(-274));
+        //System.out.println(IntToString(0));
+        //System.out.println(IntToString(1));
+        //System.out.println(IntToString(-1));
+        //System.out.println(IntToString(-274));
+        System.out.println(reverseWords("hola  como     estas_"));
+        System.out.println(' ' == ' ');
     }
     
 }

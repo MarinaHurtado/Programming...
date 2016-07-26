@@ -107,6 +107,10 @@ public class Solution {
         
         public static void main(String[] args) {
             getRow(2);
+            
+            String str = "hola";
+            System.out.println(str.indexOf(' '));
+                    
         }
     
 }
