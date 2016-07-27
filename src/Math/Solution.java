@@ -104,12 +104,36 @@ public class Solution {
             return fact;
 	}
         
+        public static int divide(int dividend, int divisor) {
+	    if(divisor == 0)
+	       return Integer.MAX_VALUE;
+            if(dividend)
+	    
+	    int sign = 0;
+	    if(dividend < 0){
+	       dividend*= -1;
+	       sign++;
+	    }
+	    if(divisor < 0){
+	       divisor*= -1;
+	       sign++;
+	    }
+            System.out.println(dividend);
+            System.out.println(divisor);
+            System.out.println(sign);
+	    int count=0;
+	     while (dividend-divisor>=0){
+	         dividend-=divisor;
+	         count++;
+	     }
+	     if(sign==1)
+	        count*=-1;
+	     return count;
+	}
+        
         
         public static void main(String[] args) {
-            getRow(2);
-            
-            String str = "hola";
-            System.out.println(str.indexOf(' '));
+            System.out.println(divide(-2147483648, -1));
                     
         }
     

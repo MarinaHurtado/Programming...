@@ -178,6 +178,34 @@ public class Arrays {
 	        arr.add(a.get(i));
 	   return arr;
 	}
+    
+    
+    /*
+    Remove duplicates from Sorted Array
+    Given a sorted array, remove the duplicates in place such that each element appears only once and return the new length.
+    Note that even though we want you to return the new length, make sure to change the original array as well in place
+    Do not allocate extra space for another array, you must do this in place with constant memory.
+
+    Example: 
+    Given input array A = [1,1,2],
+    Your function should return length = 2, and A is now [1,2]. 
+    */
+    public int removeDuplicates(ArrayList<Integer> a) {
+	    int pointer = 1;
+	    int size = a.size();
+	    Integer ant = a.get(0);
+	    for(int i=1; i<a.size(); i++){
+	        Integer act = a.get(i);
+	        if(!act.equals(ant)){
+	            a.set(pointer, act);
+	            pointer++;
+	            ant=act;
+	        }
+	        else
+	            size-=1;
+	    }
+	    return size;
+	}
 
     
     public static void main(String[] args) {
