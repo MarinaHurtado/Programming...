@@ -132,4 +132,26 @@ public class LL {
         return !flag;
     }
     
+    /*
+    Given a sorted linked list, delete all duplicates such that each element appear only once.
+
+    For example,
+    Given 1->1->2, return 1->2.
+    Given 1->1->2->3->3, return 1->2->3.
+    */
+    public ListNode deleteDuplicates(ListNode a) {
+	    ListNode act = a.next;
+	    ListNode ant = a;
+	    while(act != null){
+	        if(act.val != ant.val){
+	            act= act.next;
+	            ant = ant.next;
+	        } else {
+	            act = act.next;
+	            ant.next = act;
+	        }
+	    }
+	    return a;
+	}
+    
 }
