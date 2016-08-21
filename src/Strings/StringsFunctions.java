@@ -6,6 +6,7 @@
 package Strings;
 
 import java.util.*;
+import java.math.*;
 
 /**
  *
@@ -214,6 +215,78 @@ public class StringsFunctions {
 	    cad.deleteCharAt(cad.length()-1);
 	    return cad.toString();
 	}
+    
+    /*
+    Implement atoi to convert a string to an integer.
+
+    Example :
+    Input : "9 2704"
+    Output : 9
+    Note: There might be multiple corner cases here. Clarify all your doubts using “See Expected Output”.
+
+    Questions: 
+    Q1. Does string contain whitespace characters before the number? Yes 
+    Q2. Can the string have garbage characters after the number? Yes. Ignore it. 
+    Q3. If no numeric character is found before encountering garbage characters, what should I do? Return 0. 
+    Q4. What if the integer overflows? Return INT_MAX if the number is positive, INT_MIN otherwise. 
+    Warning : DO NOT USE LIBRARY FUNCTION FOR ATOI.
+    */
+    public class Solution {
+	public int atoi(final String a) {
+	    int j=0;
+	    while(a.charAt(j)==' ')
+	        j++;
+	        
+	    int res = 0;
+	    int len = a.length();
+	    boolean ban = false;
+	    if(a.charAt(j) == '-'){
+	        ban = true;
+	        j++;
+	    }
+	    else if(a.charAt(j)=='+'){
+	        j++;
+	    }
+	    
+	    for(int i=j; i<len; i++){
+	        Character c = a.charAt(i);
+	        if(isNumber(c)){
+    	        try{
+    	            res = Math.multiplyExact(res, 10);
+    	            res = Math.addExact(res, Character.getNumericValue(c));
+    	        } catch (Exception e){
+    	            if(ban)
+    	                return Integer.MIN_VALUE;
+    	            else
+    	               return Integer.MAX_VALUE;
+    	        }
+	        }
+	        else
+	            break;
+	    }
+	    
+	    if(ban)
+	        return res*-1;
+	   else
+	        return res;
+	}
+	
+	public boolean isNumber(char c){
+	    if (c=='0' ||
+           c=='1' ||
+           c=='2' ||
+           c=='3' ||
+           c=='4' ||
+           c=='5' ||
+           c=='6' ||
+           c=='7' ||
+           c=='8' ||
+           c=='9')
+	       return true;
+	   else
+	        return false;
+	}
+}
     
         
     ////////////////////////////////////////////////////////////////////////////////////////////////
