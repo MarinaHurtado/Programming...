@@ -237,26 +237,79 @@ public class Arrays {
 	    }
 	    return arr;
 	}
+    
+    public static ArrayList<Integer> spiralOrder(final List<ArrayList<Integer>> a) {
+            ArrayList<Integer> result = new ArrayList<Integer>();
+            int left = 0;
+            int right = a.get(0).size()-1;
+            int up = 0;
+            int down = a.size()-1;
+            int state = 1;
+            while(left <= right && up <= down){
+                if (state ==1){
+                    ArrayList<Integer> aux = a.get(up);
+                    for (int i=left; i<=right; i++){
+                        result.add(aux.get(i));
+                    }
+                    up++;
+                    state=2;
+                }
+                else if (state ==2){
+                    for (int i=up; i<=down; i++){
+                        ArrayList<Integer> aux = a.get(i);
+                        result.add(aux.get(right));
+                    }
+                    right--;
+                    state=3;
+                }
+                else if (state ==3){
+                    ArrayList<Integer> aux = a.get(down);
+                    for (int i=right; i>=left; i--){
+                        result.add(aux.get(i));
+                    }
+                    down--;
+                    state=4;
+                }
+                else if (state ==4){
+                    for (int i=down; i>=up; i--){
+                        ArrayList<Integer> aux = a.get(i);
+                        result.add(aux.get(left));
+                    }
+                    left++;
+                    state=1;
+                }
+            }
+            return result;
+   }
 
     
     public static void main(String[] args) {
-        /*
+        
         ArrayList<ArrayList<Integer>> arr = new ArrayList();
         ArrayList<Integer> a1 = new ArrayList();
         a1.add(1);
         a1.add(2);
         a1.add(3);
+        a1.add(11);
         ArrayList<Integer> a2 = new ArrayList();
         a2.add(4);
         a2.add(5);
         a2.add(6);
+        a2.add(12);
         ArrayList<Integer> a3 = new ArrayList();
         a3.add(7);
         a3.add(8);
         a3.add(9);
+        a3.add(13);
         arr.add(a1);
         arr.add(a2);
         arr.add(a3);
+        
+        a1 = spiralOrder(arr);
+        
+        for(int i=0; i<a1.size(); i++)
+            System.out.println(a1.get(i));
+        /*
         System.out.println("Empieza");
         ArrayList<ArrayList<Integer>> res = diagonal(arr);
         System.out.println("Termina");
@@ -281,12 +334,12 @@ public class Arrays {
         plusOne(arr);
         for (int i=0; i<arr.size(); i++)
             System.out.print(arr.get(i));
-        */
+       
         
 
         Double res = 0.0;
         Long a = res.longValue();
-        System.out.println( (res -a)==0 );
+        System.out.println( (res -a)==0 ); */
     }
     
 }
