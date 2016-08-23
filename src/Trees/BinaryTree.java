@@ -106,6 +106,57 @@ public class BinaryTree {
             return lowestCommonAncestor(root.right, c1, c2);
     }
     
+        /**
+        Given a binary tree, determine if it is height-balanced.
+        Height-balanced binary tree : is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1. 
+        Return 0 / 1 ( 0 for false, 1 for true ) for this problem
+        
+        * Definition for binary tree
+        * class TreeNode {
+        *     int val;
+        *     TreeNode left;
+        *     TreeNode right;
+        *     TreeNode(int x) { val = x; }
+        * }
+        */
+        public int isBalanced(TreeNode a) {
+            int ans = levels(a, 0);
+            if(ans >-1)
+                return 1;
+
+            return 0;
+	}
+	
+	public int levels(TreeNode node, int level){
+	    if(node == null)
+	        return level;
+	    
+	    int left = levels(node.left, level +1);
+	    int right = levels(node.right, level +1);
+	    if(left == -1 || right == -1)
+	        return -1;
+	    if(Math.abs(left-right)<=1)
+                         return Math.max(left, right);
+	    else return -1;
+	}
+	
+        /*
+        Given a binary tree, find its maximum depth.
+        The maximum depth of a binary tree is the number of nodes along the longest path from the root node down to the farthest leaf node.
+        */
+        public int maxDepth(TreeNode a) {
+	    return maxD(a, 0);
+	}
+	
+	public int maxD(TreeNode a, int max){
+	    if(a == null)
+	        return max;
+	    return Math.max(maxD(a.left, max+1), maxD(a.right, max+1));
+	}
+        
+
+}
+    
      
 }
 
