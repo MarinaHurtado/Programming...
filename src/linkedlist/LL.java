@@ -154,4 +154,38 @@ public class LL {
 	    return a;
 	}
     
+    /** Sort a linked list using insertion sort.
+    * Definition for singly-linked list.
+    * class ListNode {
+    *     public int val;
+    *     public ListNode next;
+    *     ListNode(int x) { val = x; next = null; }
+    * }
+    */
+    public ListNode insertionSortList(ListNode a) {
+	    ListNode newList = a;
+	    a = a.next;
+	    newList.next = null;
+	    
+	    while(a!=null){
+	        ListNode toInsert = a;
+	        a = a.next;
+	        if(toInsert.val<newList.val){
+	            toInsert.next = newList;
+	            newList = toInsert;
+	        }
+	        else {
+	            ListNode aux1 = newList.next;
+	            ListNode aux2 = newList;
+	            while(aux1!=null && aux1.val < toInsert.val){
+	                aux1 = aux1.next;
+	                aux2 = aux2.next;
+	            }
+	            toInsert.next = aux1;
+	            aux2.next = toInsert;
+	        }
+	    }
+	    return newList;
+	}
+    
 }
