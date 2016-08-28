@@ -281,8 +281,67 @@ public class Arrays {
             }
             return result;
    }
-
     
+    /* Set Matrix Zeros
+    Given an m x n matrix of 0s and 1s, if an element is 0, set its entire row and column to 0.
+    Do it in place.
+
+    Example
+    Given array A as
+    1 0 1
+    1 1 1 
+    1 1 1
+
+    On returning, the array A should be :
+    0 0 0
+    1 0 1
+    1 0 1
+    */
+    public void setZeroes(ArrayList<ArrayList<Integer>> a) {
+        ArrayList<Integer> columns = new ArrayList();
+        ArrayList<Integer> rows = new ArrayList();
+        //Look for 0's
+        for (int i=0; i<a.size(); i++)
+            for(int j=0; j<a.get(0).size(); j++){
+                if(a.get(i).get(j) == 0){
+                    columns.add(j);
+                    rows.add(i);
+                }
+            }
+       //Change zeros
+        for (int i=0; i<a.size(); i++)
+            for(int j=0; j<a.get(0).size(); j++){
+                if(columns.contains(j) || rows.contains(i)){
+                    ArrayList<Integer> row = a.get(i);
+                    row.set(j,0);
+                }
+            }
+    }
+    
+    /* Find duplicate in array
+    Given a read only array of n + 1 integers between 1 and n, find one number that repeats in linear time using less than O(n) space and traversing the stream sequentially O(1) times.
+
+    Sample Input:
+    [3 4 1 4 1]
+    Sample Output:
+    1
+
+    If there are multiple possible answers ( like in the sample case above ), output any one.
+    If there is no duplicate, output -1
+    */
+    // DO NOT MODIFY THE LIST
+    public int repeatedNumber(final List<Integer> a) {
+        Hashtable counter= new Hashtable();
+        for (int i=0; i<a.size(); i++){
+            if(counter.get(a.get(i)) == null)
+                counter.put(a.get(i), 1);
+            else
+                return a.get(i);
+        }
+        return -1;
+    }
+
+        
     public static void main(String[] args) {
         
         ArrayList<ArrayList<Integer>> arr = new ArrayList();
